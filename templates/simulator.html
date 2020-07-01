@@ -1,0 +1,31 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DDOS simulator</title>
+</head>
+<body>
+    <h1>DDOS simulator</h1>
+    <form method="post">
+       <p>Target IP:
+       <input type:"text" name="ip">
+       </p>
+
+       <p>Duration to run in seconds:
+       <input type:"text" name="timeout">
+       </p>
+       
+       <button type="submit">Start</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <p>Status:</p>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+</body>
+</html>
