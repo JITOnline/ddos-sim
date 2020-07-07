@@ -19,6 +19,7 @@ def ddosSim():
            output = p.communicate(timeout=int(time))
         except subprocess.TimeoutExpired:
            p.kill()
+           p.terinate()
            output = p.communicate()
 
         flash(output)
