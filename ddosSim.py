@@ -10,9 +10,12 @@ def ddosSim():
     if request.method == "POST":
         IP = request.form['ip']
         time = request.form['timeout']
+        packetcount = request.form['packetcount']
+        port = request.form['port']
+        ttl = request.form['ttl']
 
-        p = subprocess.Popen(["hping3", "-L", "0000", "-p", "++80", "-c", packetcount, \
-                              "--id", "0xaaaa", "-i", "u5", "--ttl", "128", IP], \
+        p = subprocess.Popen(["hping3", "-L", "0000", "-p", port, "-c", packetcount, \
+                              "--id", "0xaaaa", "-i", "u5", "--ttl", ttl, IP], \
                              stdout=subprocess.PIPE, shell=True)
 
         try:
