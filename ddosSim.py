@@ -27,4 +27,6 @@ def ddosSim():
 
         flash(output)
         return redirect(url_for('ddosSim'))
-    return render_template("simulator.html")
+    #return render_template("simulator.html")
+    my_url = url_for('ddosSim')
+    return render_template("simulator.html", data=my_url)
