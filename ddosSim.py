@@ -23,11 +23,11 @@ def ddosSim():
            output, error = p.communicate(timeout=int(time))
         except subprocess.TimeoutExpired:
            p.kill()
-           p.terminate()
            output, error = p.communicate()
 
-        flash(output)
-        return redirect(url_for('ddosSim'), _external=True, _scheme="https")
-    #return render_template("simulator.html")
+        flash("[info] ran command: {}".format(cmd))
+        output_s = output.decode("utf-8")
+        return render_template("simulator.html", data=output_s)
+      
     my_url = url_for('ddosSim')
     return render_template("simulator.html", data=my_url)
