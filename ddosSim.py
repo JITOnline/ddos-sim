@@ -26,7 +26,7 @@ def ddosSim():
            output = p.communicate()
 
         flash(output)
-        return redirect(url_for('ddosSim'))
+        return redirect(url_for('ddosSim'), _external=True, _scheme="https")
     #return render_template("simulator.html")
     my_url = url_for('ddosSim')
     return render_template("simulator.html", data=my_url)
