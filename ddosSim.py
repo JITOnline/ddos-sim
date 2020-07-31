@@ -1,6 +1,7 @@
   
 from flask import Flask, render_template, request, url_for, redirect, flash
 import subprocess
+import shlex
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '\xda\x84\x80\xd0\x87\xcf\xa0\x92\xaf\xd3\x9a\x8d\xa8\xb0\xa0o'
@@ -13,17 +14,17 @@ def ddosSim():
         packetcount = request.form['packetcount']
         port = request.form['port']
         ttl = request.form['ttl']
+        cmd = "hping3 -V -L 0000 -p {} -c {} --id 0xaaaa --fast --ttl {} {}".format(port, packetcount, ttl, IP)
+        args = shlex.split(cmd)
 
-        p = subprocess.Popen(["hping3", "-L", "0000", "-p", port, "-c", packetcount, \
-                              "--id", "0xaaaa", "-i", "u5", "--ttl", ttl, IP], \
-                             stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen(args, stdout=subprocess.PIPE)
 
         try:
-           output = p.communicate(timeout=int(time))
+           output, error = p.communicate(timeout=int(time))
         except subprocess.TimeoutExpired:
            p.kill()
            p.terminate()
-           output = p.communicate()
+           output, error = p.communicate()
 
         flash(output)
         return redirect(url_for('ddosSim'), _external=True, _scheme="https")
