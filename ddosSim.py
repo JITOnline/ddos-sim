@@ -14,7 +14,7 @@ def ddosSim():
         packetcount = request.form['packetcount']
         port = request.form['port']
         ttl = request.form['ttl']
-        cmd = "hping3 -V -L 0000 -p {} -c {} --id 0xaaaa --fast --ttl {} {}".format(port, packetcount, ttl, IP)
+        cmd = "hping3 -L 0000 -p {} -c {} --id 0xaaaa -i u5 --ttl {} {}".format(port, packetcount, ttl, IP)
         args = shlex.split(cmd)
 
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
